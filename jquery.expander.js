@@ -70,6 +70,8 @@
       userCollapseText: 'read less',
       userCollapsePrefix: ' ',
 
+	  keepContentWhitespace: false,
+
 
       // all callback functions have the this keyword mapped to the element in the jQuery set when .expander() is called
 
@@ -100,8 +102,8 @@
         rMultiSpace = /\s\s+/g,
         delayedCollapse;
 
-    var removeSpaces = function(str) {
-      return $.trim( str || '' ).replace(rMultiSpace, ' ');
+    var removeSpaces = function (str) {
+    	return  $.trim(str || '').replace(rMultiSpace, ' ');
     };
 
     var methods = {
@@ -129,7 +131,7 @@
               moreClass = o.moreClass + '',
               lessClass = o.lessClass + '',
               expandSpeed = o.expandSpeed || 0,
-              allHtml = removeSpaces( $this.html() ),
+              allHtml = o.keepContentWhitespace ? $this.html() : removeSpaces( $this.html() ),
               summaryText = allHtml.slice(0, o.slicePoint);
 
           // allow multiple classes for more/less links
